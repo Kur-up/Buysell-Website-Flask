@@ -4,6 +4,7 @@
     <title>Main Page!</title>
 </head>
 <body>
-    <a href="{{ url_for('view_mainpage_serbia') }}">Serbia</a>
+    <a href="{{ url_for('view_mainpage_serbia') }}">Serbia</a><br>
+    <img src="{{ current_user.get_avatar() }}">
 </body>
 </html>
