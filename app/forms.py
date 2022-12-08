@@ -4,6 +4,9 @@ from wtforms import StringField
 from wtforms import PasswordField
 from wtforms import SubmitField
 from wtforms import BooleanField
+# from wtforms import FileField
+
+from flask_wtf.file import FileField
 
 from wtforms.validators import DataRequired
 from wtforms.validators import ValidationError
@@ -35,5 +38,17 @@ class SignupForm(FlaskForm):
 class SigninForm(FlaskForm):
     username_or_email = StringField('Username or Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
+    first_name = StringField('Username or Email', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
+
+
+class ProfileSettingsForm(FlaskForm):
+
+    first_name = StringField('First name', validators=[DataRequired()])
+    last_name = StringField('Last name', validators=[DataRequired()])
+    phone_number = StringField('Phone number', validators=[DataRequired()])
+    avatar = FileField('Avatar image')
+    sending_recommendations = BooleanField('Send me recommendations')
+    sending_messages = BooleanField('Send me messages')
+    submit = SubmitField('Save')

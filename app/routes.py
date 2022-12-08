@@ -6,13 +6,18 @@ from flask import redirect
 from flask import url_for
 
 from app.models import UserModel
+
 from app.forms import SignupForm
 from app.forms import SigninForm
+from app.forms import ProfileSettingsForm
 
 from flask_login import current_user
 from flask_login import logout_user
 from flask_login import login_user
 from flask_login import login_required
+
+from werkzeug.utils import secure_filename
+import os
 
 
 @app.route('/')
@@ -68,6 +73,37 @@ def view_signup():
 def view_logout():
     logout_user()
     return redirect(url_for('view_mainpage'))
+
+
+@app.route('/profile/')
+def view_profile():
+    return "Your profile"
+
+
+@login_required
+@app.route('/profile/settings/', methods=['GET', 'POST'])
+def view_profile_settings():
+    form_1 = ProfileSettingsForm()
+    if form_1.validate_on_submit():
+        if current_user.first_name != form_1.first_name.data:
+            current_user.first_name = form_1.first_name.data
+        if current_user.last_name != form_1.last_name.data:
+            current_user.last_name = form_1.last_name.data
+        if current_user.phone_number != form_1.phone_number.data:
+            current_user.phone_number = form_1.phone_number.data
+        if current_user.sending_recommendations != form_1.sending_recommendations.data:
+            current_user.sending_recommendations = form_1.sending_recommendations.data
+        if current_user.sending_messages != form_1.sending_messages.data:
+            current_user.sending_messages = form_1.sending_messages.data
+        if form_1.avatar.data:
+            file = form_1.avatar.data
+            path = "static/uploads/" + str(current_user.username) + "/avatars/avatar.png"
+            file.save(path)
+            file.close()
+        db.session.commit()
+        return redirect(url_for('view_profile'))
+    else:
+        return render_template("profile_settings_template.html", form=form_1)
 
 
 @app.route('/serbia/')

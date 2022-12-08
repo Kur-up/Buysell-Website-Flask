@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit it!</title>
+</head>
+<body>
+        <h1>Settings</h1>
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.first_name.label }}<br>
+                    {% if current_user.first_name %}
+                        {{ form.first_name(size=64, value=current_user.first_name) }}<br>
+                    {% else %}
+                        {{ form.first_name(size=64) }}<br>
+                    {% endif %}
+                </p>
+                <p>
+                    {{ form.last_name.label }}<br>
+                    {% if current_user.last_name %}
+                        {{ form.last_name(size=64, value=current_user.last_name) }}<br>
+                    {% else %}
+                        {{ form.last_name(size=64) }}<br>
+                    {% endif %}
+                </p>
+                <p>
+                    {{ form.phone_number.label }}<br>
+                    {% if current_user.phone_number %}
+                        {{ form.phone_number(size=32, value=current_user.phone_number) }}<br>
+                    {% else %}
+                        {{ form.phone_number(size=32) }}<br>
+                    {% endif %}
+                </p>
+                <p>
+                    {{ form.avatar.label }}<br>
+                    {{ form.avatar() }}<br>
+                </p>
+                <p>
+                    {{ form.sending_recommendations.label }}<br>
+                    {% if current_user.sending_recommendations %}
+                        {{ form.sending_recommendations(checked=True) }}<br>
+                    {% else %}
+                        {{ form.sending_recommendations(checked=False) }}<br>
+                    {% endif %}
+                </p>
+                <p>
+                    {{ form.sending_messages.label }}<br>
+                    {% if current_user.sending_messages %}
+                        {{ form.sending_messages(checked=True) }}<br>
+                    {% else %}
+                        {{ form.sending_messages(checked=False) }}<br>
+                    {% endif %}
+                </p>
+                <p>
+                    {{ form.submit() }}
+                </p>
+            </form>
+    </body>
+</html>

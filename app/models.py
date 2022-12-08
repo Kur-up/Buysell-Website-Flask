@@ -82,10 +82,73 @@ class PersonalItemsClothesModel(db.Model):
     def __repr__(self):
         return '<Post-PersonalItemsClothes: Post ID: {} | Owner ID: {} >'.format(str(self.id), str(self.owner_id))
 
-    def upload_photo:
+    def upload_photo(self):
         pass
 
-    def get_photo:
+    def get_photo(self):
+        pass
+
+
+class PersonalItemsShoesModel(db.Model):
+    # Required
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(128), index=True)
+    description = db.Column(db.String(1024))
+    price = db.Column(db.Float)
+    photo_list = db.Column(db.PickleType)
+    city_id = db.Column(db.Integer, db.ForeignKey('city_model.id'))
+    country_id = db.Column(db.Integer, db.ForeignKey('country_model.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey('user_model.id'))
+    create_timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow())
+    stop_timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow()+datetime.timedelta(days=30))
+    active_status = db.Column(db.Boolean, default=True)
+    deleted_status = db.Column(db.Boolean, default=False)
+    like_count = db.Column(db.Integer, default=0)
+
+    # Additional
+    clothes_season = db.Column(db.String(32))
+    clothes_sex = db.Column(db.String(16))
+    clothes_size = db.Column(db.String(8))
+    clothes_status = db.Column(db.String(16))
+
+    def __repr__(self):
+        return '<Post-PersonalItemsShoes: Post ID: {} | Owner ID: {} >'.format(str(self.id), str(self.owner_id))
+
+    def upload_photo(self):
+        pass
+
+    def get_photo(self):
+        pass
+
+
+class PersonalItemsAccessoriesModel(db.Model):
+    # Required
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(128), index=True)
+    description = db.Column(db.String(1024))
+    price = db.Column(db.Float)
+    photo_list = db.Column(db.PickleType)
+    city_id = db.Column(db.Integer, db.ForeignKey('city_model.id'))
+    country_id = db.Column(db.Integer, db.ForeignKey('country_model.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey('user_model.id'))
+    create_timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow())
+    stop_timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow()+datetime.timedelta(days=30))
+    active_status = db.Column(db.Boolean, default=True)
+    deleted_status = db.Column(db.Boolean, default=False)
+    like_count = db.Column(db.Integer, default=0)
+
+    # Additional
+    clothes_type = db.Column(db.String(32))
+    clothes_sex = db.Column(db.String(16))
+    clothes_status = db.Column(db.String(16))
+
+    def __repr__(self):
+        return '<Post-PersonalItemsAccessories: Post ID: {} | Owner ID: {} >'.format(str(self.id), str(self.owner_id))
+
+    def upload_photo(self):
+        pass
+
+    def get_photo(self):
         pass
 
 
