@@ -38,7 +38,6 @@ class SignupForm(FlaskForm):
 class SigninForm(FlaskForm):
     username_or_email = StringField('Username or Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
-    first_name = StringField('Username or Email', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 

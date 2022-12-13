@@ -1,27 +1,40 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Sign In!</title>
-</head>
-<body>
-        <h1>Login</h1>
-            <form action="" method="post">
-                {{ form.hidden_tag() }}
-                <p>
-                    {{ form.username_or_email.label }}<br>
-                    {{ form.username_or_email(size=128) }}<br>
-                </p>
-                <p>
-                    {{ form.password.label }}<br>
-                    {{ form.password(size=64) }}<br>
-                </p>
-                <p>
-                    {{ form.remember_me.label }}<br>
-                    {{ form.remember_me() }}<br>
-                </p>
-                <p>
-                    {{ form.submit() }}
-                </p>
+<html lang="eng">
+    <head>
+        <meta charset="utf-8">
+        <title>َSign in!</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/signin_style.css') }}">
+        <meta name = "viewport" content="width=device=width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class = "wrapper">
+            <header class="header">
+                <div class="header__container">
+                    <a href="" class="header__logo"></a>
+                </div>
+            </header>
+        <div class="form-container">
+            <img src="static/images/bgImg.jpg" alt="" class="bg__img">
+
+            <form class="form-box" method="post">
+                <img src="{{ url_for('static', filename='images/user.png') }}" alt="user photo" class="user">
+                <h1>Sign in</h1>
+                <p>{{ form.hidden_tag() }}</p>
+                {{ form.username_or_email(size=128, placeholder="Username or email") }}
+                {{ form.password(size=64, placeholder="Password") }}
+                <tr>
+                    <td colspan="2" class="text_center" >
+                        <label>
+                            {{ form.remember_me(checked=True) }}Remember me
+                        </label>
+                    </td>
+                </tr>
+                {{ form.submit(value="Sign in") }}
+                    <a href="#" class="forgot__link">Forget password?</a>
+                    <a href="{{ url_for('view_signup') }}" class="forgot__link">Registration</a>
+                    <a href="{{ url_for('view_mainpage') }}" class="forgot__link">Back</a>
             </form>
-    </body>
+
+        </div>
+      </body>
 </html>
